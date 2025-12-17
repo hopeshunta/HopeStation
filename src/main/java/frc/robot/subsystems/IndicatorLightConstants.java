@@ -14,6 +14,7 @@ public class IndicatorLightConstants {
   public static int UPDATE_FREQUENCY = 15;
 
   public static enum LED_EFFECTS {
+    DARK_BLUE,
     RED,
     ORANGE,
     YELLOW,

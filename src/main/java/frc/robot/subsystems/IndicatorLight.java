@@ -39,6 +39,7 @@ public class IndicatorLight extends SubsystemBase {
   private AddressableLEDBuffer wlVioletLEDBuffer;
   private AddressableLEDBuffer wlWhiteLEDBuffer;
   private AddressableLEDBuffer wlBlackLEDBuffer;
+  private AddressableLEDBuffer wlDark_BlueLEDBuffer;
 
   // Store what the last hue of the first pixel is
   private int rainbowFirstPixelHue = 0;
@@ -135,6 +136,12 @@ public class IndicatorLight extends SubsystemBase {
       wlBlackLEDBuffer.setLED(i, Color.kBlack);
     }
 
+    wlDark_BlueLEDBuffer =
+    new AddressableLEDBuffer(IndicatorLightConstants.ADDRESSABLE_LED_BUFFER_LENGTH);
+    for (var i = 0; i < wlRedLEDBuffer.getLength(); i++) {
+    wlDark_BlueLEDBuffer.setLED(i, Color.kDarkBlue);
+    }
+
     effectTimer.start();
   }
 
@@ -147,7 +154,8 @@ public class IndicatorLight extends SubsystemBase {
       LED_State = currentColor_GOAL;
     }
     switch (LED_State) {
-     
+      
+      case DARK_BLUE -> setActiveBuffer(wlDark_BlueLEDBuffer);
       case RED -> setActiveBuffer(wlRedLEDBuffer);
       case YELLOW -> setActiveBuffer(wlYellowLEDBuffer);
       case GREEN -> setActiveBuffer(wlGreenLEDBuffer);
@@ -561,7 +569,7 @@ public class IndicatorLight extends SubsystemBase {
 
 
     if (DriverStation.isDisabled()) {
-      return LED_EFFECTS.RSL;
+      return LED_EFFECTS.DARK_BLUE;
     }
 
     return LED_EFFECTS.BLUEOMBRE;
