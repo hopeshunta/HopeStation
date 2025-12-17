@@ -1,12 +1,13 @@
-package frc.robot;
+package frc.robot.subsystems;
 
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-public final class MotorConfigs {
+public final class ArmMotorConfigs {
 
-    public static final SparkMaxConfig armConfig = new SparkMaxConfig();
-    public static final SparkMaxConfig littleMotorConfig = new SparkMaxConfig();
+    public static final SparkBaseConfig armConfig = new SparkMaxConfig();
+    public static final SparkBaseConfig littleMotorConfig = new SparkMaxConfig();
 
     static {
       // Configure basic settings of the elevator motor
