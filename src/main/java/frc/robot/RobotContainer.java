@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ArmMotorConfigs;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IndicatorLight;
 
@@ -35,22 +36,28 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
 
-  private int ArmControllerID = 6;
- private final SparkMax armMotor;
- private final RelativeEncoder armEncoder;
+//Variables 
+//Set ID's for each electronic device
 
+//Arm motor variables
+ public int ArmControllerID = 6;
+ public final SparkMax armMotor;
+ public final RelativeEncoder armEncoder;
+
+//  Little motor variables
  private int LittleControllerID = 7;
  private final SparkMax littleMotor;
  private final RelativeEncoder littleMotorEncoder;
 
+ //Swerve Turn variables
  private int swerveTurnControllerID = 3;
  private final TalonSRX swerveTurnMotor;
- private int swerveDriveControllerID = 4;
 
+ //Swerve Drive variables
+ private int swerveDriveControllerID = 4;
  private final TalonSRX swerveDriveMotor;
 
-
- 
+ //LED Variables
  private final IndicatorLight indicatorLight;
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -58,7 +65,7 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-
+//Pnuematic Variables
   public final DoubleSolenoid doubleSolenoidTop;
   public final DoubleSolenoid doubleSolenoidBottom; 
   public final Solenoid singleSolenoidRelease;
@@ -76,18 +83,18 @@ public class RobotContainer {
     armEncoder = armMotor.getEncoder();
    
     armMotor.configure(
-        MotorConfigs.armConfig,
+        ArmMotorConfigs.armConfig,
         ResetMode.kResetSafeParameters,
         PersistMode.kPersistParameters);
     armEncoder.setPosition(0);
 
-    armMotor.set(-0.02);
+ 
 
     littleMotor = new SparkMax(LittleControllerID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     littleMotorEncoder = littleMotor.getEncoder();
 
     littleMotor.configure(
-        MotorConfigs.littleMotorConfig,
+        ArmMotorConfigs.littleMotorConfig,
         ResetMode.kResetSafeParameters,
         PersistMode.kPersistParameters);
     littleMotorEncoder.setPosition(0);
@@ -102,8 +109,6 @@ public class RobotContainer {
     swerveDriveMotor = new TalonSRX(swerveDriveControllerID);
     // swerveDriveMotor.getConfigurator().apply(config);
     swerveDriveMotor.set(TalonSRXControlMode.PercentOutput, 0.20);
-
-
 
     // Configure the trigger bindings
     configureBindings();
